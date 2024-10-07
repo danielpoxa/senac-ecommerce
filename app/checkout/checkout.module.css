@@ -1,0 +1,46 @@
+/* CheckoutPage.module.css */
+
+.container {
+    background-color: #f7f9fc; /* Cor de fundo suave */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .paper {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    color: #333; /* Cor de texto mais escura */
+    font-size: 1.75rem; /* Tamanho maior para título */
+    font-weight: bold;
+  }
+  
+  .button {
+    background-color: #0081ea; /* Cor de destaque */
+    color: #fff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #0098b3; /* Cor de destaque ao passar o mouse */
+  }
+  
+  .textField {
+    margin-bottom: 16px;
+  }
+  
+  .footer {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .total {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #0081ea; /* Cor de destaque */
+  }
