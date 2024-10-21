@@ -4,6 +4,8 @@
 
 ## Fase 2: Desenvolvimento do Back-end e Integração de Dados
 
+LINK MONGODB DOWNLOAD: https://www.mongodb.com/try/download/community
+
 ## Objetivos:
 
 - Desenvolver as APIs necessárias para o e-commerce.
