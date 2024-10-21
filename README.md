@@ -2,39 +2,151 @@
 
 # Simulação de E-commerce - Projeto Next.js
 
-## Visão Geral - Fase 1
+## Fase 2: Desenvolvimento do Back-end e Integração de Dados
 
-Este projeto é uma simulação de uma plataforma de e-commerce desenvolvida pelos alunos. O foco inicial será na construção da interface do usuário, seguida pelo desenvolvimento do back-end e da camada de dados. O projeto utiliza Next.js como framework e MUI (Material-UI) para os componentes da interface.
+LINK MONGODB DOWNLOAD: https://www.mongodb.com/try/download/community
 
-O projeto será dividido em diferentes funcionalidades, atribuídas a grupos de estudantes (duplas ou um trio). Cada grupo será responsável por desenvolver uma parte específica da interface front-end. Após completar a interface, avançaremos para as outras camadas da aplicação.
+## Objetivos:
 
-LINK DE EXEMPLO: https://bazaar.ui-lib.com/market-2
-
-
-## Funcionalidades Atribuídas
-
-Cada dupla/trio será responsável pela implementação de uma funcionalidade específica da interface. Abaixo estão as atribuições de funcionalidades:
-
-- Yan & Vitor Hugo: Página de Login
-- Welker & Tais: Componente de Card de Produto
-- Vitor & Richard: Página de Listagem de Produtos
-- Lorran & Davi Vale: Barra de Navegação
-- Daniel & Erica: Página de Checkout
-- Raphael & Davi: Página de Detalhes do Produto
-- Augusto, Arthur & Pedro: Carrinho de Compras
-
-## Estrutura do Projeto
-
-O projeto é construído com Next.js e utiliza MUI para estilização e layout dos componentes. Os alunos focarão nos seguintes pontos:
-
-- Criar componentes reutilizáveis para a interface.
-- Cada funcionalidade terá sua própria branch de desenvolvimento.
-- Testar componentes em páginas dedicadas antes de integrá-los ao projeto.
+- Desenvolver as APIs necessárias para o e-commerce.
+- Conectar a interface desenvolvida na Fase 1 com o back-end.
+- Criar e configurar a base de dados usando MongoDB Atlas para armazenar informações sobre produtos, usuários, pedidos e carrinho de compras.
+- Implementar autenticação e autorização de usuários usando NextAuth.js.
+- Garantir que a aplicação seja funcional e escalável.
 
 # Stack Tecnológico 
 
 - Next.js (Framework React)
 - MUI (Material-UI) (Biblioteca de componentes de interface)
+- Node.js com Express para o desenvolvimento do back-end.
+- MongoDB Atlas para armazenamento de dados.
+- NextAuth.js para autenticação e autorização.
+- Axios ou Fetch API para consumo das APIs no front-end.
+
+## Tarefas por Grupos:
+
+1. Yan & Vitor Hugo - Autenticação Básica com NextAuth.js
+- Descrição: Implementar a autenticação de usuários de forma simples com NextAuth.js.
+
+Tarefas:
+- Configurar NextAuth.js para login usando provedores como Google ou credenciais simples (nome e senha).
+- Criar uma página de login conectada ao NextAuth.js.
+- Testar a autenticação com MongoDB, armazenando apenas nome de usuário e senha (sem necessidade de dados complexos).
+
+2. Welker & Tais - API Simples de Produtos
+- Descrição: Criar uma API básica para manipular produtos.
+
+Tarefas:
+- Listar Produtos: Utilize a rota de GET /api/product para buscar e exibir os produtos.
+
+Exemplo de chamada para exibir os produtos usando Axios:
+```
+import axios from 'axios';
+
+const fetchProducts = async () => {
+  const response = await axios.get('/api/product');
+  return response.data;
+};
+
+```
+
+3. Vitor & Richard - Exibição e Filtros Simples de Produtos
+- Descrição: Implementar a exibição e filtros básicos para os produtos.
+
+Tarefas:
+- Consumir a API de Produtos: Utilize a rota de GET /api/product para listar os produtos.
+- Filtros: Adicione filtros no front-end para permitir a filtragem dos produtos por nome ou preço. A filtragem pode ser feita após a obtenção dos dados com Axios.
+
+  Exemplo de exibição e filtro:
+
+  ```
+  import axios from 'axios';
+
+  const fetchFilteredProducts = async (filter) => {
+    const response = await axios.get(`/api/product?category=${filter.category}&price=${filter.price}`);
+    return response.data;
+  };
+
+  ```
+
+4. Lorran & Davi Vale - Navegação Simples e Páginas Protegidas
+- Descrição: Implementar a navegação e proteger páginas com base na autenticação.
+
+Tarefas:
+- Usar NextAuth.js para proteger páginas, como o Carrinho e Checkout, permitindo apenas o acesso de usuários autenticados.
+- Testar a navegação entre a página de login e as áreas protegidas.
+
+  ```
+  import { useSession } from 'next-auth/react';
+
+  function ProtectedPage() {
+    const { data: session, status } = useSession();
+  
+    if (status === "loading") return <div>Loading...</div>;
+    if (!session) return <div>Você precisa estar autenticado</div>;
+  
+    return <div>Conteúdo protegido</div>;
+  }
+
+  ```
+
+5. Daniel & Erica - API Simples de Checkout e Pedidos
+- Utilizar a API do Cart para trazer os itens para o checkout
+
+Tarefas:
+- Utilize a rota /api/cart para buscar os dados do carrinho que foi fechado e listar os itens na pagina de checkout
+- Consumir a API de Carrinho para realizar o checkout.
+- Não é necessário implementar uma ordem, apenas processar os itens do carrinho.
+
+```
+import axios from 'axios';
+
+const checkout = async () => {
+  try {
+    const response = await axios.get('/api/cart');
+    console.log('Itens no carrinho:', response.data);
+    // Processar os itens do carrinho para checkout
+  } catch (error) {
+    console.error('Erro ao buscar itens do carrinho:', error);
+  }
+};
+
+```
+
+6. Raphael & Davi - Página de Detalhes do Produto e Avaliações Básicas
+- Descrição: Criar o footer do projeto
+
+Tarefas:
+Criar o componente footer para ser usado na página.
+
+7. Augusto, Arthur & Pedro - API Simples do Carrinho de Compras
+- Descrição: Desenvolver a API e funcionalidade simples do carrinho de compras.
+
+Tarefas:
+- Consumir a API de Carrinho utilizando Axios.
+- Listar e gerenciar os itens do carrinho na interface.
+
+  ```
+  import axios from 'axios';
+
+  const fetchCartItems = async () => {
+    try {
+      const response = await axios.get('/api/cart');
+      console.log('Itens do carrinho:', response.data);
+    } catch (error) {
+      console.error('Erro ao buscar itens do carrinho:', error);
+    }
+  };
+
+  ```
+
+# Como utilizar MONGODB NO SEU COMPUTADOR
+- Instale mongodb no projeto
+```
+npm install mongodb
+```
+
+
 
 ## Branches e Pull Requests
 

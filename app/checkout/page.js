@@ -16,8 +16,7 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import styles from './checkout.module.css'; // Importando o CSS
-
+import styles from "./checkout.module.css"; // Importando o CSS
 
 export default function CheckoutPage() {
   const [formValues, setFormValues] = useState({
@@ -43,8 +42,13 @@ export default function CheckoutPage() {
     cpf: "",
     birthDate: "",
     paymentType: "avista", // Novo estado para o tipo de pagamento
+
     boletoNumber: "",      // Novo campo para número do boleto
     pixKey: "",            // Novo campo para chave Pix
+
+    boletoNumber: "", // Novo campo para número do boleto
+    pixKey: "", // Novo campo para chave Pix
+
   });
 
   const [totalValue] = useState(100); // Exemplo de valor total da compra
@@ -57,13 +61,19 @@ export default function CheckoutPage() {
   const handlePostalCodeChange = async (e) => {
     const { value } = e.target;
     setFormValues({ ...formValues, postalCode: value });
+
     
+
+
+
     // Verifica se o CEP tem 8 dígitos
     if (value.length === 8) {
       try {
         const response = await fetch(`https://viacep.com.br/ws/${value}/json/`);
         const data = await response.json();
+
         
+
         // Verifica se o CEP retornou um endereço válido
         if (!data.erro) {
           setFormValues((prevValues) => ({
@@ -98,7 +108,13 @@ export default function CheckoutPage() {
       <Grid container spacing={4}>
         <Grid item xs={12} md={8}>
           <Paper className={styles.paper}>
+
             <Typography className={styles.title}>Detalhes de Faturamento</Typography>
+
+            <Typography className={styles.title}>
+              Detalhes de Faturamento
+            </Typography>
+
             <form onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -271,16 +287,29 @@ export default function CheckoutPage() {
                   />
                 </Grid>
               </Grid>
+
               
               <Divider sx={{ margin: "20px 0" }} />
               <Typography className={styles.title} sx={{ marginTop: 3 }}>Forma de Pagamento</Typography>
               <FormControl component="fieldset" sx={{ marginBottom: 2 }}>
                 <FormLabel component="legend">Escolha seu método de pagamento</FormLabel>
+
+
+              <Divider sx={{ margin: "20px 0" }} />
+              <Typography className={styles.title} sx={{ marginTop: 3 }}>
+                Forma de Pagamento
+              </Typography>
+              <FormControl component="fieldset" sx={{ marginBottom: 2 }}>
+                <FormLabel component="legend">
+                  Escolha seu método de pagamento
+                </FormLabel>
+
                 <RadioGroup
                   name="paymentMethod"
                   value={formValues.paymentMethod}
                   onChange={handleInputChange}
                 >
+
                   <FormControlLabel value="visa" control={<Radio />} label="Visa" />
                   <FormControlLabel value="mastercard" control={<Radio />} label="MasterCard" />
                   <FormControlLabel value="amex" control={<Radio />} label="American Express" />
@@ -288,13 +317,62 @@ export default function CheckoutPage() {
                   <FormControlLabel value="elo" control={<Radio />} label="Elo" />
                   <FormControlLabel value="pix" control={<Radio />} label="Pix" />
                   <FormControlLabel value="boleto" control={<Radio />} label="Boleto" />
+=======
+                  <FormControlLabel
+                    value="visa"
+                    control={<Radio />}
+                    label="Visa"
+                  />
+                  <FormControlLabel
+                    value="mastercard"
+                    control={<Radio />}
+                    label="MasterCard"
+                  />
+                  <FormControlLabel
+                    value="amex"
+                    control={<Radio />}
+                    label="American Express"
+                  />
+                  <FormControlLabel
+                    value="diners"
+                    control={<Radio />}
+                    label="Diners Club"
+                  />
+                  <FormControlLabel
+                    value="elo"
+                    control={<Radio />}
+                    label="Elo"
+                  />
+                  <FormControlLabel
+                    value="pix"
+                    control={<Radio />}
+                    label="Pix"
+                  />
+                  <FormControlLabel
+                    value="boleto"
+                    control={<Radio />}
+                    label="Boleto"
+                  />
+
                 </RadioGroup>
               </FormControl>
 
               {/* Seção de Cartão de Crédito */}
+
               {formValues.paymentMethod === "visa" || formValues.paymentMethod === "mastercard" || formValues.paymentMethod === "amex" || formValues.paymentMethod === "diners" || formValues.paymentMethod === "elo" ? (
                 <Box>
                   <Typography variant="h6">Dados do Cartão de Crédito</Typography>
+
+              {formValues.paymentMethod === "visa" ||
+              formValues.paymentMethod === "mastercard" ||
+              formValues.paymentMethod === "amex" ||
+              formValues.paymentMethod === "diners" ||
+              formValues.paymentMethod === "elo" ? (
+                <Box>
+                  <Typography variant="h6">
+                    Dados do Cartão de Crédito
+                  </Typography>
+
                   <TextField
                     fullWidth
                     label="Número do Cartão"
@@ -397,6 +475,3 @@ export default function CheckoutPage() {
     </Container>
   );
 }
-
-
-
